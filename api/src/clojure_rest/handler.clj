@@ -7,6 +7,7 @@
               [compojure.handler :as handler]
               [clj-time.core]
               [monger.core :as mg]
+              [monger.query :as mq]
               [monger.json]
               [monger.joda-time]
               [monger.collection :as mc]
@@ -17,10 +18,15 @@
   (mg/connect!)
   (mg/set-db! (mg/get-db "monger-test"))
 
-
+  (defn retreive-sorted-entries []
+    (mq/with-collection "entries"
+      (mq/find {})
+      (mq/fields [:created_at :text :_id])
+      (mq/sort (array-map :_id -1))
+      (mq/limit 10)))
 
   (defn get-all-entries []
-    (response {:results (mc/find-maps "entries")}))
+    (response {:results (retreive-sorted-entries)}))
 
   (defn create-new-entry [doc]
     (let [existing (mc/find-maps "entries" {:title (doc "title")})
