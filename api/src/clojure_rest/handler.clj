@@ -1,11 +1,14 @@
 (ns clojure-rest.handler
       (:import [com.mongodb DB WriteConcern]
-               [org.bson.types ObjectId])
+               [org.bson.types ObjectId]
+               [java.util.Date])
       (:require [compojure.core :refer [defroutes context GET POST]]
                 [ring.util.response :refer [response]]
                 [compojure.handler :as handler]
+                [clj-time.core]
                 [monger.core :as mg]
                 [monger.json]
+                [monger.joda-time]
                 [monger.collection :as mc]
                 [ring.middleware.json :as middleware]
                 [clojure.java.jdbc :as sql]
@@ -19,7 +22,7 @@
 
     (defn create-new-document [doc]
       (let [existing (mc/find-maps "documents" {:title (doc "title")})
-            db_doc (merge {"saved" "hi"} doc)]
+            db_doc (merge {"created_at" (clj-time.core/now)} doc)]
         (cond
           (empty? existing) (response (mc/insert-and-return "documents" db_doc))
           :else {:status 404})))
