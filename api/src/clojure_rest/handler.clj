@@ -11,7 +11,6 @@
                 [monger.joda-time]
                 [monger.collection :as mc]
                 [ring.middleware.json :as middleware]
-                [clojure.java.jdbc :as sql]
                 [compojure.route :as route]))
 
     (mg/connect!)
@@ -26,26 +25,6 @@
         (cond
           (empty? existing) (response (mc/insert-and-return "entries" db_doc))
           :else {:status 404})))
-      
-
-    ; (defn get-document [id]
-    ;   (sql/with-connection (db-connection)
-    ;     (sql/with-query-results results
-    ;       ["select * from documents where id = ?" id]
-    ;       (cond
-    ;         (empty? results) 
-    ;         :else (response (first results))))))
-
-    ; (defn update-document [id doc]
-    ;     (sql/with-connection (db-connection)
-    ;       (let [document (assoc doc "id" id)]
-    ;         (sql/update-values :documents ["id=?" id] document)))
-    ;     (get-document id))
-
-    ; (defn delete-document [id]
-    ;   (sql/with-connection (db-connection)
-    ;     (sql/delete-rows :documents ["id=?" id]))
-    ;   {:status 204})
 
     (defroutes app-routes
       (context "/entries" [] (defroutes entries-routes
