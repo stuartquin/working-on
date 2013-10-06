@@ -15,3 +15,5 @@ pom.xml
 Session.vim
 .netrwhist
 *~
+
+/client/app/components
