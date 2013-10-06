@@ -1,9 +1,24 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="row">
+  <div class="col-md-12 editor">
+    <h1>WorkingOn</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 editor">
+    <form ng-submit="createEntry()">
+      <textarea
+       ng-model="newEntry"
+       placeholder="I've been working on..."></textarea>
+      <br />
+      <input type="submit" class="btn" value="Add" />
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 feed">
+    <div class="entry" ng-repeat="entry in entries">
+      <h3>{{entry.created_at}}</h3>
+      <div class="entry-body">{{entry.text}}</div>
+    </div>
+  </div>
 </div>

@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('clientApp')
+angular.module('WorkingOnApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.entries = [
+      {created_at: "4 hours ago", text: "Began learning clojure"}
     ];
+    $scope.createEntry = function(){
+      $scope.entries.unshift({created_at: "now", text: this.newEntry});
+    };
   });

@@ -1,7 +1,7 @@
 'use strict';
+var WorkingOnApp = angular.module('WorkingOnApp', []);
 
-angular.module('clientApp', [])
-  .config(function ($routeProvider) {
+WorkingOnApp.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
