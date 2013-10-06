@@ -17,3 +17,5 @@ Session.vim
 *~
 
 /client/app/components
+/client/.travis.yml
+/api/.lein*
