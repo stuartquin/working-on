@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('WorkingOnApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.entries = [
-      {created_at: "4 hours ago", text: "Began learning clojure"}
-    ];
+  .controller('MainCtrl', function ($scope, $resource) {
+    var setEntriesScope = function(data){
+      $scope.entries = data.results;
+    };
+
+    var Entries = $resource("http://local.workingon.com/entries");
+    Entries.get({}, setEntriesScope);
+
     $scope.createEntry = function(){
-      $scope.entries.unshift({created_at: "now", text: this.newEntry});
+      $scope.entries.unshift({created_at: (new Date()).getTime(), text: this.newEntry});
     };
   });

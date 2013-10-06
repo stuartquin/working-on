@@ -11,6 +11,7 @@
                 [monger.joda-time]
                 [monger.collection :as mc]
                 [ring.middleware.json :as middleware]
+                [ring.middleware.cors :refer [wrap-cors]]
                 [compojure.route :as route]))
 
     (mg/connect!)
@@ -39,4 +40,5 @@
     (def app
         (-> (handler/api app-routes)
             (middleware/wrap-json-body)
+            (wrap-cors :access-control-allow-origin #".*")
             (middleware/wrap-json-response)))

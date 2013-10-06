@@ -1,5 +1,6 @@
 'use strict';
-var WorkingOnApp = angular.module('WorkingOnApp', []);
+var deps = ["ngResource", "angularMoment"];
+var WorkingOnApp = angular.module('WorkingOnApp', deps);
 
 WorkingOnApp.config(function ($routeProvider) {
     $routeProvider
