@@ -17,14 +17,14 @@
     (mg/connect!)
     (mg/set-db! (mg/get-db "monger-test"))
 
-    (defn get-all-documents []
-      (response {:results (mc/find-maps "documents")}))
+    (defn get-all-entries []
+      (response {:results (mc/find-maps "entries")}))
 
-    (defn create-new-document [doc]
-      (let [existing (mc/find-maps "documents" {:title (doc "title")})
+    (defn create-new-entry [doc]
+      (let [existing (mc/find-maps "entries" {:title (doc "title")})
             db_doc (merge {"created_at" (clj-time.core/now)} doc)]
         (cond
-          (empty? existing) (response (mc/insert-and-return "documents" db_doc))
+          (empty? existing) (response (mc/insert-and-return "entries" db_doc))
           :else {:status 404})))
       
 
@@ -48,9 +48,9 @@
     ;   {:status 204})
 
     (defroutes app-routes
-      (context "/documents" [] (defroutes documents-routes
-        (GET  "/" [] (get-all-documents))
-        (POST "/" {body :body} (create-new-document body))))
+      (context "/entries" [] (defroutes entries-routes
+        (GET  "/" [] (get-all-entries))
+        (POST "/" {body :body} (create-new-entry body))))
     ;    (context "/:id" [id] (defroutes document-routes
     ;      (GET    "/" [] (get-document id))
     ;      (PUT    "/" {body :body} (update-document id body))
