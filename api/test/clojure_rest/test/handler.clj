@@ -12,6 +12,6 @@
 ;         (is (= (:body response) "{\"results\":\"test\"}"))
 ;         (is (= (:status response) 200))))))
 
-(fact "Hitting a valid URI should return 200"
-  (let [response (app (request :get "/entries"))]
-    (:status response) => 200))
+(fact (:status (app (request :get "/entries"))) => 200
+      (:body (app (request :get "/entries"))) => "{\"results\":\"test\"}"
+  (provided (retreive-sorted-entries) => "test"))
