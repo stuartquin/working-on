@@ -18,7 +18,7 @@
   (mg/connect!)
   (mg/set-db! (mg/get-db "monger-test"))
 
-  (defn retreive-sorted-entries []
+  (defn ^:dynamic retreive-sorted-entries []
     (mq/with-collection "entries"
       (mq/find {})
       (mq/fields [:created_at :text :_id])
