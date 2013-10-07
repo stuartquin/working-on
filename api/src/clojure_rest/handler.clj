@@ -18,7 +18,7 @@
   (mg/connect!)
   (mg/set-db! (mg/get-db "monger-test"))
 
-  (defn retreive-sorted-entries []
+  (defn ^:dynamic retreive-sorted-entries []
     (mq/with-collection "entries"
       (mq/find {})
       (mq/fields [:created_at :text :_id])
@@ -28,11 +28,11 @@
   (defn get-all-entries []
     (response {:results (retreive-sorted-entries)}))
 
-  (defn create-new-entry [doc]
-    (let [existing (mc/find-maps "entries" {:title (doc "title")})
-          db_doc (merge {"created_at" (clj-time.core/now)} doc)]
+  (defn create-new-entry [entry]
+    (let [existing (mc/find-maps "entries" {:title (entry "title")})
+          db_entry (merge {"created_at" (clj-time.core/now)} entry)]
       (cond
-        (empty? existing) (response (mc/insert-and-return "entries" db_doc))
+        (empty? existing) (response (mc/insert-and-return "entries" db_entry))
         :else {:status 404})))
 
   (defroutes app-routes

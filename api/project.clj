@@ -9,7 +9,10 @@
                  [compojure "1.1.5"]
                  [clj-time "0.6.0"]
                  [com.novemberain/monger "1.5.0"]]
-  :plugins [[lein-ring "0.8.5"]]
+  :plugins [
+    [lein-midje "3.0.0"]
+    [lein-ring "0.8.5"]]
   :ring {:handler clojure-rest.handler/app}
   :profiles
-  {:dev {:dependencies [[ring-mock "0.1.5"]]}})
+  {:dev {:dependencies [[ring-mock "0.1.5"]
+                        [midje "1.5.1"]]}})
