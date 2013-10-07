@@ -15,8 +15,9 @@
               [ring.middleware.cors :refer [wrap-cors]]
               [compojure.route :as route]))
 
-  (mg/connect!)
-  (mg/set-db! (mg/get-db "monger-test"))
+  (defn connect-db []
+    (mg/connect!)
+    (mg/set-db! (mg/get-db "monger-test")))
 
   (defn ^:dynamic retreive-sorted-entries []
     (mq/with-collection "entries"
@@ -26,6 +27,7 @@
       (mq/limit 10)))
 
   (defn get-all-entries []
+    (connect-db)
     (response {:results (retreive-sorted-entries)}))
 
   (defn create-new-entry [entry]
