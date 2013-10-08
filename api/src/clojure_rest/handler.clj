@@ -19,7 +19,7 @@
     (mg/connect!)
     (mg/set-db! (mg/get-db "monger-test")))
 
-  (defn ^:dynamic retreive-sorted-entries []
+  (defn retreive-sorted-entries []
     (mq/with-collection "entries"
       (mq/find {})
       (mq/fields [:created_at :text :_id])
@@ -31,6 +31,7 @@
     (response {:results (retreive-sorted-entries)}))
 
   (defn create-new-entry [entry]
+    (connect-db)
     (let [existing (mc/find-maps "entries" {:title (entry "title")})
           db_entry (merge {"created_at" (clj-time.core/now)} entry)]
       (cond
