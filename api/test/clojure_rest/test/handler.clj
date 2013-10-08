@@ -15,5 +15,7 @@
 (fact "POST /entries saves value"
       (prerequisite (connect-db) => true
                     (mc/insert-and-return "entries" anything) => "test")
-      (let [req (request :post "/entries" "{\"text\":\"test\"}")]
-        (:body (app (content-type req "application/json"))) => "test"))
+      (let [req (request :post "/entries" "{\"text\":\"test\"}")
+            res (app (content-type req "application/json"))]
+        (:body res) => "test"
+        (:status res) => 200))
