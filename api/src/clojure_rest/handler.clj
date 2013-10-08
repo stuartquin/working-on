@@ -32,11 +32,8 @@
 
   (defn create-new-entry [entry]
     (connect-db)
-    (let [existing (mc/find-maps "entries" {:title (entry "title")})
-          db_entry (merge {"created_at" (clj-time.core/now)} entry)]
-      (cond
-        (empty? existing) (response (mc/insert-and-return "entries" db_entry))
-        :else {:status 404})))
+    (let [db_entry (merge {"created_at" (clj-time.core/now)} entry)]
+      (response (mc/insert-and-return "entries" db_entry))))
 
   (defroutes app-routes
     (context "/entries" [] (defroutes entries-routes
