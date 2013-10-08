@@ -12,3 +12,15 @@ WorkingOnApp.config(function ($routeProvider) {
         redirectTo: '/'
       });
   });
+
+WorkingOnApp.directive('markdown', ['$timeout', function ($timeout) {
+  var converter = new Showdown.converter();
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function (scope, elem, attrs, ngModel) {
+      debugger;
+      elem.text(converter.makeHtml(elem.text()));
+    }
+  };
+}]);

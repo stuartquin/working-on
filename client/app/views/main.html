@@ -15,7 +15,7 @@
   <div class="col-md-12 feed">
     <div class="entry" ng-repeat="entry in entries">
       <h4 am-time-ago="entry.created_at"></h4>
-      <div class="entry-body">{{entry.text}}</div>
+      <div class="entry-body" markdown>{{entry.text}}</div>
     </div>
   </div>
 </div>
