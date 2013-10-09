@@ -13,14 +13,13 @@ WorkingOnApp.config(function ($routeProvider) {
       });
   });
 
-WorkingOnApp.directive('markdown', ['$timeout', function ($timeout) {
+WorkingOnApp.directive('markdown-entry', function () {
   var converter = new Showdown.converter();
   return {
     restrict: 'A',
     scope: true,
     link: function (scope, elem, attrs, ngModel) {
-      debugger;
-      elem.text(converter.makeHtml(elem.text()));
+      elem.html(converter.makeHtml(scope.entry.text));
     }
   };
-}]);
+});
