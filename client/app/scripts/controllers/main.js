@@ -15,6 +15,8 @@ angular.module('WorkingOnApp')
     editor.getSession().setMode("ace/mode/markdown");
     editor.renderer.setShowGutter(false);
     editor.setFontSize("16px");
+    editor.setShowPrintMargin(false);
+    editor.setHighlightActiveLine(false);
 
     $scope.createEntry = function(){
       var entry = new Entry();
