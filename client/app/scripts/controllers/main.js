@@ -7,7 +7,7 @@ angular.module('WorkingOnApp')
       $scope.entries = data.results;
     };
 
-    var Entry = $resource("http://127.0.0.1:3000/entries");
+    var Entry = $resource("http://local.workingon.com/entries");
     Entry.get({}, setEntriesScope);
 
     var editor = ace.edit("editor");

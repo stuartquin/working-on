@@ -13,7 +13,7 @@ WorkingOnApp.config(function ($routeProvider) {
       });
   });
 
-WorkingOnApp.directive('markdown-entry', function () {
+WorkingOnApp.directive('markdownEntry', function () {
   var converter = new Showdown.converter();
   return {
     restrict: 'A',
