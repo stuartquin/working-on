@@ -4,18 +4,23 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6 editor">
-    <form ng-submit="createEntry()">
-      <div id="editor" style="height: 200px;"></div>
-      <input type="submit" class="btn" value="Add" />
-    </form>
-  </div>
+  <form ng-submit="createEntry()">
+    <div class="col-md-6 editor">
+      <div id="editor" class="create-entry-editor"></div>
+    </div>
+    <div class="col-md-6 create-entry-controls">
+      <div class="pull-right"> 
+        <input type="submit" class="btn btn-large" value="Add" />
+      </div>
+    </div>
+  </form>
 </div>
 <div class="row">
   <div class="col-md-12 feed">
+    <hr />
     <div class="entry" ng-repeat="entry in entries">
-      <h4 am-time-ago="entry.created_at"></h4>
-      <div class="entry-body" markdown-entry="entry.text"></div>
+      <em am-time-ago="entry.created_at"></em>
+      <div class="entry-body well" markdown-entry="entry.text"></div>
     </div>
   </div>
 </div>

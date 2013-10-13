@@ -11,7 +11,7 @@ angular.module('WorkingOnApp')
     Entry.get({}, setEntriesScope);
 
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/tomorrow");
+    editor.setTheme("ace/theme/solarized_light");
     editor.getSession().setMode("ace/mode/markdown");
     editor.renderer.setShowGutter(false);
     editor.setFontSize("16px");
