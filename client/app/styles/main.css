@@ -55,3 +55,7 @@ body {
 .entry-body {
     margin-top: 10px;
 }
+
+.ace_tag {
+    color: #55D;
+}
