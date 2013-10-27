@@ -10,6 +10,7 @@
               [monger.query :as mq]
               [monger.json]
               [monger.joda-time]
+              [monger.operators :refer [$in]]
               [monger.collection :as mc]
               [ring.middleware.json :as middleware]
               [ring.middleware.cors :refer [wrap-cors]]
@@ -19,16 +20,20 @@
     (mg/connect!)
     (mg/set-db! (mg/get-db "monger-test")))
 
-  (defn retreive-sorted-entries []
+  (defn retreive-sorted-entries [conditions]
     (mq/with-collection "entries"
-      (mq/find {})
+      (mq/find conditions)
       (mq/fields [:created_at :text :_id :tags])
       (mq/sort (array-map :_id -1))
       (mq/limit 10)))
 
   (defn get-all-entries []
     (connect-db)
-    (response {:results (retreive-sorted-entries)}))
+    (response {:results (retreive-sorted-entries {})}))
+
+  (defn get-entries-by-tag [tag]
+    (connect-db)
+    (response {:results (retreive-sorted-entries {:tags {$in [tag]}})}))
 
   (defn create-new-entry [entry]
     (connect-db)
@@ -38,7 +43,9 @@
   (defroutes app-routes
     (context "/entries" [] (defroutes entries-routes
       (GET  "/" [] (get-all-entries))
-      (POST "/" {body :body} (create-new-entry body))))
+      (POST "/" {body :body} (create-new-entry body))
+      (context "/tag" [] (defroutes tags-routes
+        (GET "/:tag" [tag] (get-entries-by-tag tag))))))
     (route/not-found "Not Found"))
 
   (def app
