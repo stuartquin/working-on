@@ -22,7 +22,7 @@
   (defn retreive-sorted-entries []
     (mq/with-collection "entries"
       (mq/find {})
-      (mq/fields [:created_at :text :_id])
+      (mq/fields [:created_at :text :_id :tags])
       (mq/sort (array-map :_id -1))
       (mq/limit 10)))
 
