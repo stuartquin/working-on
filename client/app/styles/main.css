@@ -36,6 +36,15 @@ body {
   border-width: 1px;
 }
 
+.create-entry-tags {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.create-entry-tags input {
+  width: 946px;
+}
+
 .create-entry-controls {
   margin-top: 20px;
 }
@@ -61,6 +70,6 @@ body {
 }
 
 .tags a {
-  padding-left: 10px;
-  pointer: cursor;
+  padding-left: 5px;
+  cursor: pointer;
 }
